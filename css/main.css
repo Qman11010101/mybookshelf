@@ -68,6 +68,7 @@ h1 {
 }
 
 input[type=text] {
-    background-color: #ffffff;
-    border: 1px solid #000000;
+    background-color: #fff;
+    border: 1px solid #000;
+    text-align: left;
 }
