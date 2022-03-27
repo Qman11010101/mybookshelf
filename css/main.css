@@ -41,6 +41,21 @@ h1 {
     padding: calc(50px - 0.5em) 0;
     width: 100%;
 }
+
+/* 登録ボタン */
+
+.register {
+    display: block;
+    border: 1px solid #333;
+    margin: 5px auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eee;
+}
+
+.register:hover {
+    background-color: #333;
+    color: #fff;
 }
 
 /* スプレッドシートID入力画面 */
