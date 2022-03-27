@@ -1,3 +1,5 @@
+/* 総合 */
+
 body {
     background-color: beige;
     margin-top: 30px;
@@ -13,6 +15,8 @@ h1 {
     font-size: 200%;
 }
 
+/* ボタン */
+
 .indexbutton {
     width: calc(100% - 20px);
     height: 100px;
@@ -21,3 +25,6 @@ h1 {
     text-align: center;
     margin: 10px;
 }
+
+/* スプレッドシートID入力画面 */
+
