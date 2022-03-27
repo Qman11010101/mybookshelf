@@ -28,3 +28,14 @@ h1 {
 
 /* スプレッドシートID入力画面 */
 
+#sheetinput {
+    width: min-content;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.5em;
+}
+
+input[type=text] {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
