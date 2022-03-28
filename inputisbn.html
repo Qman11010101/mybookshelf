@@ -13,8 +13,21 @@
 <body>
     <div id="bodyblock">
         <h1>我が家の本棚</h1>
+        <div class="inputblock">
+            <label for="isbn">ISBNコードを半角で入力してください</label>
+            <input type="text" id="isbn">
+            <button class="register" id="registerisbn" onclick="registerISBN()">登録する</button>
+        </div>
+        <div class="registeredbooks">
+            <h3>登録済み書籍</h3>
+            <!--placeholder-->
+            <div class="book">
+                <span class="bookkey">ISBN: </span>9764798160054<br>
+                <span class="bookkey">書名: </span>図解まるわかり サーバーのしくみ<br>
+                <span class="bookkey">著者: </span>西村泰洋
+            </div>
+        </div>
     </div>
-
 </body>
 
 </html>
