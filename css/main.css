@@ -58,9 +58,16 @@ h1 {
     color: #fff;
 }
 
-/* スプレッドシートID入力画面 */
+/* スプレッドシートID入力 */
 
-#sheetinput {
+.doneregister {
+    color: #006600;
+    display: none;
+}
+
+/* 汎用入力画面 */
+
+.inputblock {
     width: min-content;
     margin: 0 auto;
     text-align: center;
@@ -73,7 +80,4 @@ input[type=text] {
     text-align: left;
 }
 
-.doneregister {
-    color: #006600;
-    display: none;
-}
+
