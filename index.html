@@ -7,6 +7,15 @@
     <title>我が家の本棚</title>
     <link rel="stylesheet" href="css/destyle.css">
     <link rel="stylesheet" href="css/main.css">
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("sheetid").value = localStorage.getItem("spreadsheetID");
+        });
+
+        function registerSpreadsheetID() {
+            localStorage.setItem("spreadsheetID", document.getElementById("sheetid").value);
+        }
+    </script>
 </head>
 
 <body>
@@ -23,7 +32,7 @@
         <div id="sheetinput">
             <lavel for="sheetid">スプレッドシートID</lavel>
             <input type="text" id="sheetid">
-            <button class="register" id="registerid">IDを登録する</button>
+            <button class="register" id="registerid" onclick="registerSpreadsheetID()">IDを登録する</button>
             <!-- 登録しました表示(setTimeoutか何かで3秒したら消える？) -->
         </div>
     </div>
