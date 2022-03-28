@@ -40,6 +40,7 @@ h1 {
     text-align: center;
     padding: calc(50px - 0.5em) 0;
     width: 100%;
+    user-select: none;
 }
 
 /* 登録ボタン */
@@ -66,6 +67,11 @@ h1 {
 }
 
 /* 汎用入力画面 */
+
+label {
+    user-select: none;
+    cursor: default;
+}
 
 .inputblock {
     width: min-content;
