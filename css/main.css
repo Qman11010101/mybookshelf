@@ -16,6 +16,10 @@ h1 {
     margin: 20px 0;
 }
 
+h3 {
+    font-size: 150%;
+}
+
 /* リンクボタン */
 
 .linkbutton {
@@ -87,4 +91,21 @@ input[type=text] {
     text-align: left;
 }
 
+/* ISBN入力画面(登録) */
 
+.registeredbooks {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.book {
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+}
+
+.bookkey {
+    font-weight: bold;
+}
