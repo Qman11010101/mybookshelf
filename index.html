@@ -14,6 +14,11 @@
 
         function registerSpreadsheetID() {
             localStorage.setItem("spreadsheetID", document.getElementById("sheetid").value);
+            let doneregisterSheetid = document.getElementById("donesheetid");
+            doneregisterSheetid.style.display = "block";
+            setTimeout(function () {
+                doneregisterSheetid.style.display = "none";
+            }, 3000);
         }
     </script>
 </head>
@@ -33,7 +38,7 @@
             <lavel for="sheetid">スプレッドシートID</lavel>
             <input type="text" id="sheetid">
             <button class="register" id="registerid" onclick="registerSpreadsheetID()">IDを登録する</button>
-            <!-- 登録しました表示(setTimeoutか何かで3秒したら消える？) -->
+            <div class="doneregister" id="donesheetid">✓ 登録しました</div>
         </div>
     </div>
 

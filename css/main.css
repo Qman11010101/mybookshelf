@@ -72,3 +72,8 @@ input[type=text] {
     border: 1px solid #000;
     text-align: left;
 }
+
+.doneregister {
+    color: #006600;
+    display: none;
+}
