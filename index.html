@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="css/main.css">
     <script>
         window.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("sheetid").value = localStorage.getItem("spreadsheetID");
+            document.getElementById("endpoint").value = localStorage.getItem("endpoint");
         });
 
-        function registerSpreadsheetID() {
+        function registerEndpoint() {
             const endpointValue = document.getElementById("endpoint").value;
             if (!endpointValue.startsWith("https://")) {
                 alert("URLの形式が不正です！");
