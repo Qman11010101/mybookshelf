@@ -13,11 +13,16 @@
         });
 
         function registerSpreadsheetID() {
-            localStorage.setItem("spreadsheetID", document.getElementById("sheetid").value);
-            let doneregisterSheetid = document.getElementById("donesheetid");
-            doneregisterSheetid.style.display = "block";
+            const endpointValue = document.getElementById("endpoint").value;
+            if (!endpointValue.startsWith("https://")) {
+                alert("URLの形式が不正です！");
+                return;
+            }
+            localStorage.setItem("endpoint", endpointValue);
+            let doneregisterEndpoint = document.getElementById("doneendpoint");
+            doneregisterEndpoint.style.display = "block";
             setTimeout(function () {
-                doneregisterSheetid.style.display = "none";
+                doneregisterEndpoint.style.display = "none";
             }, 3000);
         }
     </script>
@@ -37,11 +42,11 @@
                 <a href="search.html"><span>登録済みの書籍を検索する</span></a>
             </div>
         </div>
-        <div id="sheetinput" class="inputblock">
-            <label for="sheetid">スプレッドシートID</label>
-            <input type="text" id="sheetid">
-            <button class="register" id="registerid" onclick="registerSpreadsheetID()">IDを登録する</button>
-            <div class="doneregister" id="donesheetid">✓ 登録しました</div>
+        <div id="endpointinput" class="inputblock">
+            <label for="endpoint">アップロードURL</label>
+            <input type="text" id="endpoint">
+            <button class="register" id="registerendpoint" onclick="registerEndpoint()">URLを登録する</button>
+            <div class="doneregister" id="doneendpoint">✓ 登録しました</div>
         </div>
     </div>
 

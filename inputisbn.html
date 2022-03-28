@@ -8,6 +8,32 @@
     <link rel="stylesheet" href="css/destyle.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js"></script>
+    <script>
+        let sheedid; 
+
+        window.addEventListener("DOMContentLoaded", function () {
+            sheetid = localStorage.getItem("endpoint");
+            if (sheedid === null) {
+                alert("アップロードURLが登録されていません！前の画面に戻って登録してください。");
+            }
+        });
+
+        function registerISBN() {
+            // 同一ISBNの本が登録済みでないか検索
+            const isbn = document.getElementById("isbn").value;
+            const books = document.getElementById("registeredbooks").children;
+            
+            for (let i = 0; i < books.length; i++) {
+                if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
+                    alert("既に登録されています！");
+                    return
+                }
+            }
+
+            // OpenBDから本の情報を取得
+
+        }
+    </script>
 </head>
 
 <body>
@@ -18,13 +44,14 @@
             <input type="text" id="isbn">
             <button class="register" id="registerisbn" onclick="registerISBN()">登録する</button>
         </div>
-        <div class="registeredbooks">
-            <h3>登録済み書籍</h3>
+        <h3>登録済み書籍</h3>
+        <div id="registeredbooks">
             <!--placeholder-->
             <div class="book">
-                <span class="bookkey">ISBN: </span>9764798160054<br>
-                <span class="bookkey">書名: </span>図解まるわかり サーバーのしくみ<br>
-                <span class="bookkey">著者: </span>西村泰洋
+                <span class="bookkey">ISBN: </span><span class="isbnval">9764798160054</span><br>
+                <span class="bookkey">書名: </span><span class="titleval">図解まるわかり サーバーのしくみ</span><br>
+                <span class="bookkey">著者: </span><span class="authorval">西村泰洋</span><br>
+                <button class="remove">削除する</button>
             </div>
         </div>
     </div>
