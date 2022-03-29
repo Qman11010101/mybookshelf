@@ -9,24 +9,34 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js"></script>
     <script>
-        let sheedid; 
+        let uploadURL;
+        let booksRegistered = [];
+        const openbdURL = "https://api.openbd.jp/v1/get?isbn="; // 完成後main.jsに移動
 
         window.addEventListener("DOMContentLoaded", function () {
-            sheetid = localStorage.getItem("endpoint");
-            if (sheedid === null) {
-                alert("アップロードURLが登録されていません！前の画面に戻って登録してください。");
+            uploadURL = localStorage.getItem("endpoint");
+            if (uploadURL === null) {
+                alert("アップロードURLが登録されていません。前の画面に戻って登録してください。");
             }
         });
 
         function registerISBN() {
             // 同一ISBNの本が登録済みでないか検索
             const isbn = document.getElementById("isbn").value;
+
+            if (isbn === "") {
+                alert("ISBNコードが入力されていません。");
+                return;
+            }
+
+            // TODO: ISBNコードのバリデーション(数字13桁)
+
             const books = document.getElementById("registeredbooks").children;
             
             for (let i = 0; i < books.length; i++) {
                 if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
-                    alert("既に登録されています！");
-                    return
+                    alert("既に登録されています。");
+                    return;
                 }
             }
 
