@@ -41,7 +41,66 @@
             }
 
             // OpenBDから本の情報を取得
+            const bookDataRaw = await getData(openbdURL + isbn);
+            const bookData = JSON.parse(bookDataRaw)[0];
+            
+            if (bookData === null) {
+                alert("入力されたISBNコードの本は存在しないか、データベースに登録されていません。");
+                return;
+            }
 
+            // 要素追加
+            const registered = document.getElementById("registeredbooks");
+
+            const bookdiv = registered.appendChild(document.createElement("div"));
+            bookdiv.className = "book";
+
+            const bookISBN = bookData.onix.ProductIdentifier.IDValue;
+            const bookTitle = bookData.onix.DescriptiveDetail.TitleDetail.TitleElement.TitleText.content;
+
+            let bookAuthorsArray = bookData.onix.DescriptiveDetail.Contributor;
+            let bookAuthors = "";
+            for (let i = 0; i < bookAuthorsArray.length; i++) {
+                bookAuthors += bookAuthorsArray[i].PersonName.content;
+                if (i !== bookAuthorsArray.length - 1) {
+                    bookAuthors += " / ";
+                }
+            }
+
+            const isbnkey = bookdiv.appendChild(document.createElement("span"));
+            isbnkey.innerText = "ISBN: ";
+            isbnkey.className = "bookkey";
+
+            const isbnval = bookdiv.appendChild(document.createElement("span"));
+            isbnval.innerText = bookISBN;
+            isbnval.className = "isbnval";
+
+            bookdiv.appendChild(document.createElement("br"));
+
+            const titlekey = bookdiv.appendChild(document.createElement("span"));
+            titlekey.innerText = "書名: ";
+            titlekey.className = "bookkey";
+
+            const titleval = bookdiv.appendChild(document.createElement("span"));
+            titleval.innerText = bookTitle;
+            titleval.className = "titleval";
+
+            bookdiv.appendChild(document.createElement("br"));
+
+            const authorkey = bookdiv.appendChild(document.createElement("span"));
+            authorkey.innerText = "著者: ";
+            authorkey.className = "bookkey";
+
+            const authorval = bookdiv.appendChild(document.createElement("span"));
+            authorval.innerText = bookAuthors;
+            authorval.className = "authorval";
+
+            bookdiv.appendChild(document.createElement("br"));
+
+            const deleteButton = bookdiv.appendChild(document.createElement("button"));
+            deleteButton.className = "remove";
+            deleteButton.innerText = "削除する"
+            deleteButton.addEventListener("click", deleteRegisteredBook);
         }
     </script>
 </head>
