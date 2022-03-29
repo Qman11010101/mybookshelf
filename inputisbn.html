@@ -20,7 +20,18 @@
             }
         });
 
-        function registerISBN() {
+        function deleteRegisteredBook(isbn) {
+            const registeredBooksArray = document.getElementById("registeredbooks").children;
+            for (let i = 0; i < registeredBooksArray.length; i++) {
+                let bookdiv = registeredBooksArray[i];
+                if (bookdiv.getElementsByClassName("isbnval")[0].innerText == isbn) {
+                    bookdiv.remove();
+                    break;
+                }
+            }
+        }
+
+        async function registerISBN() {
             // 同一ISBNの本が登録済みでないか検索
             const isbn = document.getElementById("isbn").value;
 
@@ -99,8 +110,10 @@
 
             const deleteButton = bookdiv.appendChild(document.createElement("button"));
             deleteButton.className = "remove";
-            deleteButton.innerText = "削除する"
-            deleteButton.addEventListener("click", deleteRegisteredBook);
+            deleteButton.innerText = "削除する";
+            deleteButton.addEventListener("click", function() {
+                deleteRegisteredBook(bookISBN);
+            });
         }
     </script>
 </head>
