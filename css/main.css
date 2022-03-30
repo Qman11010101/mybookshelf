@@ -87,9 +87,7 @@ label {
 }
 
 .inputblock {
-    width: -webkit-min-content;
-    width: -moz-min-content;
-    width: min-content;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     line-height: 1.5em;
