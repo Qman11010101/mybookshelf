@@ -44,12 +44,12 @@
             const books = document.getElementById("registeredbooks").children;
             
             // 同一ISBNの本が登録済みでないか検索
-            // for (let i = 0; i < books.length; i++) {
-            //     if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
-            //         alert("既に登録されています。");
-            //         return;
-            //     }
-            // }
+            for (let i = 0; i < books.length; i++) {
+                if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
+                    alert("既に登録されています。");
+                    return;
+                }
+            }
 
             // OpenBDから本の情報を取得
             const bookDataRaw = await getData(openbdURL + isbn);
