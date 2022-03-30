@@ -136,17 +136,10 @@
                 return;
             }
 
-            const dataStr = JSON.stringify(booksRegistered);
-            console.log(dataStr)
+            const dataStr = base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
-            const response = fetch(uploadURL, {
-                body: dataStr,
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                mode: "cors",
-            });            
+            const response = fetch(uploadURL + "?b=" + dataStr);            
         }
     </script>
 </head>
