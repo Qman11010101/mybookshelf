@@ -114,6 +114,9 @@
             deleteButton.addEventListener("click", function() {
                 deleteRegisteredBook(bookISBN);
             });
+
+            // 自動的に下までスクロールする
+            registered.scrollTop = registered.scrollHeight;
         }
     </script>
 </head>
