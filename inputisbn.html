@@ -131,25 +131,23 @@
 
         async function postBook() {
             uploadURL = localStorage.getItem("endpoint");
-            // if (uploadURL === null) {
-            //     alert("アップロードURLが登録されていません。前の画面に戻って登録してください。");
-            //     return;
-            // }
+            if (uploadURL === null) {
+                alert("アップロードURLが登録されていません。前の画面に戻って登録してください。");
+                return;
+            }
 
             const dataStr = JSON.stringify(booksRegistered);
             console.log(dataStr)
 
-            // // 送信
-            // const response = fetch(uploadURL, {
-            //     method: "POST",
-            //     body: booksRegistered,
-            //     headers: {
-            //         "Accept": "application/json",
-            //         "Content-Type": "application/json"
-            //     }
-            // });
-
-            
+            // 送信
+            const response = fetch(uploadURL, {
+                method: "POST",
+                body: booksRegistered,
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            });            
         }
     </script>
 </head>
