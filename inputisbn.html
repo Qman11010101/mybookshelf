@@ -139,7 +139,7 @@
             const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
-            const response = await fetch(uploadURL + "?b=" + encodeURI(dataStr));
+            const response = await fetch(uploadURL + "?b=" + dataStr);
         }
     </script>
 </head>
