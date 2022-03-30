@@ -139,7 +139,7 @@
             const dataStr = base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
-            const response = fetch(uploadURL + "?b=" + dataStr);            
+            const response = fetch(uploadURL + "?b=" + dataStr, {mode: "cors"});            
         }
     </script>
 </head>
