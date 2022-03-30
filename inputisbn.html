@@ -141,12 +141,11 @@
 
             // 送信
             const response = fetch(uploadURL, {
-                method: "POST",
                 body: dataStr,
                 headers: {
                     "Content-Type": "application/json"
                 },
-                // mode: "cors",
+                mode: "cors",
             });            
         }
     </script>
