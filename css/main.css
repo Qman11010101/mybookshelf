@@ -47,7 +47,10 @@ h3 {
     text-align: center;
     padding: calc(50px - 0.5em) 0;
     width: 100%;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 /* 登録ボタン */
@@ -76,11 +79,16 @@ h3 {
 /* 汎用入力画面 */
 
 label {
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
     cursor: default;
 }
 
 .inputblock {
+    width: -webkit-min-content;
+    width: -moz-min-content;
     width: min-content;
     margin: 0 auto;
     text-align: center;
