@@ -103,6 +103,18 @@ input[type=text] {
 
 /* ISBN入力画面(登録) */
 
+#registeredbooks {
+    height: 50vh;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    margin-bottom: 20px;
+}
+
+#registeredbooks::-webkit-scrollbar {
+    display: none;
+}
+
 .book {
     border: 1px solid #000;
     border-radius: 10px;
