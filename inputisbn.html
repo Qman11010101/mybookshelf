@@ -10,7 +10,7 @@
     <script src="js/main.js"></script>
     <script>
         let uploadURL;
-        let booksRegistered = [];
+        var booksRegistered = [];
         const openbdURL = "https://api.openbd.jp/v1/get?isbn=";
 
         window.addEventListener("DOMContentLoaded", function () {
@@ -42,7 +42,7 @@
             // TODO: ISBNコードのバリデーション(数字13桁)
 
             const books = document.getElementById("registeredbooks").children;
-            
+
             // 同一ISBNの本が登録済みでないか検索
             for (let i = 0; i < books.length; i++) {
                 if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
@@ -54,7 +54,7 @@
             // OpenBDから本の情報を取得
             const bookDataRaw = await getData(openbdURL + isbn);
             const bookData = JSON.parse(bookDataRaw)[0];
-            
+
             if (bookData === null) {
                 alert("入力されたISBNコードの本は存在しないか、データベースに登録されていません。");
                 return;
@@ -66,8 +66,8 @@
             const bookdiv = registered.appendChild(document.createElement("div"));
             bookdiv.className = "book";
 
-            const bookISBN = bookData.onix.ProductIdentifier.IDValue;
-            const bookTitle = bookData.onix.DescriptiveDetail.TitleDetail.TitleElement.TitleText.content;
+            const bookISBN = bookData.summary.isbn;
+            const bookTitle = bookData.summary.title;
 
             let bookAuthorsArray = bookData.onix.DescriptiveDetail.Contributor;
             let bookAuthors = "";
@@ -77,6 +77,8 @@
                     bookAuthors += " / ";
                 }
             }
+
+            const bookPublisher = bookData.summary.publisher;
 
             const isbnkey = bookdiv.appendChild(document.createElement("span"));
             isbnkey.innerText = "ISBN: ";
@@ -111,12 +113,43 @@
             const deleteButton = bookdiv.appendChild(document.createElement("button"));
             deleteButton.className = "remove";
             deleteButton.innerText = "削除する";
-            deleteButton.addEventListener("click", function() {
+            deleteButton.addEventListener("click", function () {
                 deleteRegisteredBook(bookISBN);
+            });
+
+            // 本をリストに追加
+            booksRegistered.push({
+                isbn: bookISBN,
+                title: bookTitle,
+                author: bookAuthors,
+                publisher: bookPublisher
             });
 
             // 自動的に下までスクロールする
             registered.scrollTop = registered.scrollHeight;
+        }
+
+        async function postBook() {
+            uploadURL = localStorage.getItem("endpoint");
+            // if (uploadURL === null) {
+            //     alert("アップロードURLが登録されていません。前の画面に戻って登録してください。");
+            //     return;
+            // }
+
+            const dataStr = JSON.stringify(booksRegistered);
+            console.log(dataStr)
+
+            // // 送信
+            // const response = fetch(uploadURL, {
+            //     method: "POST",
+            //     body: booksRegistered,
+            //     headers: {
+            //         "Accept": "application/json",
+            //         "Content-Type": "application/json"
+            //     }
+            // });
+
+            
         }
     </script>
 </head>
