@@ -139,7 +139,14 @@
             const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
-            const response = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr));
+            const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr));
+            const response = responseRaw.json();
+            if (response.code === 200) {
+                doneregisterEndpoint.style.display = "block";
+                setTimeout(function () {
+                    doneregisterEndpoint.style.display = "none";
+                }, 3000);
+            }
         }
     </script>
 </head>
@@ -164,6 +171,7 @@
         </div>
         <div id="postbooksection">
             <button class="register" id="postbook" onclick="postBook()">送信する</button>
+            <div class="doneregister" id="doneendpoint">✓ 登録しました</div>
         </div>
     </div>
 </body>
