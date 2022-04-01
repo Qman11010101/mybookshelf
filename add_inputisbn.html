@@ -141,6 +141,7 @@
             // 送信
             const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr));
             const response = responseRaw.json();
+            console.log(response.code)
             if (response.code === 200) {
                 doneregisterEndpoint.style.display = "block";
                 setTimeout(function () {
@@ -153,7 +154,7 @@
 
 <body>
     <div id="bodyblock">
-        <h1>我が家の本棚</h1>
+        <h1>書籍登録ページ</h1>
         <div class="inputblock">
             <label for="isbn">ISBNコードを半角で入力してください</label><br>
             <input type="text" id="isbn">
