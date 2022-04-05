@@ -122,7 +122,9 @@
             registered.scrollTop = registered.scrollHeight;
         }
 
-        async function postBook() {
+        // action: "move"もしくは"delete"
+        // URL自体は"search"も受け付けるがここではこの2つしか扱わない
+        async function postBook(action) {
             uploadURL = localStorage.getItem("endpoint");
             if (uploadURL === null) {
                 alert("アップロードURLが登録されていません。前の画面に戻って登録してください。");
@@ -132,7 +134,7 @@
             const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
-            const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr));
+            const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr) + "&action=" + action);
             const response = responseRaw.json();
             console.log(response.code)
             if (response.code === 200) {
