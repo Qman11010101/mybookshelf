@@ -69,14 +69,7 @@
             const bookISBN = bookData.summary.isbn;
             const bookTitle = bookData.summary.title;
 
-            let bookAuthorsArray = bookData.onix.DescriptiveDetail.Contributor;
-            let bookAuthors = "";
-            for (let i = 0; i < bookAuthorsArray.length; i++) {
-                bookAuthors += bookAuthorsArray[i].PersonName.content;
-                if (i !== bookAuthorsArray.length - 1) {
-                    bookAuthors += " / ";
-                }
-            }
+            let bookAuthors = bookData.summary.author;
 
             const bookPublisher = bookData.summary.publisher;
 
