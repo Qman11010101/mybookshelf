@@ -24,8 +24,6 @@
                         codeRepetition: true,
                         tryVertical: false,
                         frameRate: 15,
-                        width: 640,
-                        height: 480,
                         facingMode: "environment"
                     },
                 },
@@ -83,6 +81,11 @@
                         });
                     }
                 }
+            });
+
+            Quagga.onDetected(success => {
+                const code = success.codeResult.code;
+                alert(code);
             });
         });
 
