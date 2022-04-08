@@ -42,8 +42,7 @@ async function registerISBN(isbn) {
     // 同一ISBNの本が登録済みでないか検索
     for (let i = 0; i < books.length; i++) {
         if (books[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
-            alert("既に登録されています。");
-            return;
+            return "Already registered";
         }
     }
 
@@ -157,5 +156,8 @@ async function registerISBNFromInput() {
 
     // TODO: ISBNコードのバリデーション(数字13桁)
 
-    registerISBNInside(isbn);
+    const resp = registerISBNInside(isbn);
+    if (resp === "Already registered") {
+        alert("既に登録されています")
+    }
 }
