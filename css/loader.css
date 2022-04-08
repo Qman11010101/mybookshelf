@@ -1,0 +1,23 @@
+.loader {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    border: 0.25em solid #f5f5dc;
+    border-top-color: #333;
+    -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+    margin: 30px auto;
+    display: none;
+}
+
+@-webkit-keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}

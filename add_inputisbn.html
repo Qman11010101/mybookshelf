@@ -7,6 +7,7 @@
     <title>我が家の本棚</title>
     <link rel="stylesheet" href="css/destyle.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
     <script src="js/main.js"></script>
     <script>
         let uploadURL;
@@ -134,14 +135,20 @@
             const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
             // 送信
+            const loader = document.getElementById("postloader");
+            loader.style.display = "block";
             const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr) + "&action=" + action);
             const response = responseRaw.json();
             console.log(response.code)
             if (response.code === 200) {
+                loader.style.display = "none";
                 doneregisterEndpoint.style.display = "block";
                 setTimeout(function () {
                     doneregisterEndpoint.style.display = "none";
                 }, 3000);
+            } else {
+                alert(`エラーが発生しました(Error ${response.code})`);
+                loader.style.display = "none";
             }
         }
     </script>
@@ -168,6 +175,7 @@
         <div id="postbooksection">
             <button class="register" id="postbook" onclick="postBook()">送信する</button>
             <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
+            <div class="loader" id="postloader"></div>
         </div>
     </div>
 </body>
