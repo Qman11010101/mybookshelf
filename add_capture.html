@@ -12,77 +12,80 @@
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
     <script>
         // 実装後camera.jsかなにかに隔離
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector("#photo-area"),
-                constraints: {
-                    decodeBarCodeRate: 3,
-                    successTimeout: 500,
-                    codeRepetition: true,
-                    tryVertical: false,
-                    frameRate: 15,
-                    width: 640,
-                    height: 480,
-                    facingMode: "environment"
+        window.addEventListener("DOMContentLoaded", function () {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector("#photo-area"),
+                    constraints: {
+                        decodeBarCodeRate: 3,
+                        successTimeout: 500,
+                        codeRepetition: true,
+                        tryVertical: false,
+                        frameRate: 15,
+                        width: 640,
+                        height: 480,
+                        facingMode: "environment"
+                    },
                 },
-            },
-            decoder: {
-                readers: [
-                    "ean_reader"
-                ]
-            },
-        }, function (err) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            Quagga.start();
-        });
+                decoder: {
+                    readers: [
+                        "ean_reader"
+                    ]
+                },
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                Quagga.start();
+            });
 
-        // バーコードを検出したときの処理
-        Quagga.onProcessed(function (result) {
-            var drawingCtx = Quagga.canvas.ctx.overlay,
-                drawingCanvas = Quagga.canvas.dom.overlay;
-            if (result) {
-                // 認識したバーコードを囲む
-                if (result.boxes) {
-                    drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-                    result.boxes.filter(function (box) {
-                        return box !== result.box;
-                    }).forEach(function (box) {
-                        Quagga.ImageDebug.drawPath(box, {
+            // バーコードを検出したときの処理
+            Quagga.onProcessed(function (result) {
+                var drawingCtx = Quagga.canvas.ctx.overlay,
+                    drawingCanvas = Quagga.canvas.dom.overlay;
+                if (result) {
+                    // 認識したバーコードを囲む
+                    if (result.boxes) {
+                        drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                        result.boxes.filter(function (box) {
+                            return box !== result.box;
+                        }).forEach(function (box) {
+                            Quagga.ImageDebug.drawPath(box, {
+                                x: 0,
+                                y: 1
+                            }, drawingCtx, {
+                                color: "white",
+                                lineWidth: 2
+                            });
+                        });
+                    }
+                    // 読み取ったバーコードを囲む
+                    if (result.box) {
+                        Quagga.ImageDebug.drawPath(result.box, {
                             x: 0,
                             y: 1
                         }, drawingCtx, {
-                            color: "white",
+                            color: "#01f965",
                             lineWidth: 2
                         });
-                    });
+                    }
+                    // 読み取ったバーコードに線を引く
+                    if (result.codeResult && result.codeResult.code) {
+                        Quagga.ImageDebug.drawPath(result.line, {
+                            x: 'x',
+                            y: 'y'
+                        }, drawingCtx, {
+                            color: '#00b900',
+                            lineWidth: 2
+                        });
+                    }
                 }
-                // 読み取ったバーコードを囲む
-                if (result.box) {
-                    Quagga.ImageDebug.drawPath(result.box, {
-                        x: 0,
-                        y: 1
-                    }, drawingCtx, {
-                        color: "#01f965",
-                        lineWidth: 2
-                    });
-                }
-                // 読み取ったバーコードに線を引く
-                if (result.codeResult && result.codeResult.code) {
-                    Quagga.ImageDebug.drawPath(result.line, {
-                        x: 'x',
-                        y: 'y'
-                    }, drawingCtx, {
-                        color: '#00b900',
-                        lineWidth: 2
-                    });
-                }
-            }
+            });
         });
+
     </script>
 </head>
 
