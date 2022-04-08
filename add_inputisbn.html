@@ -139,7 +139,6 @@
             loader.style.display = "block";
             const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr) + "&action=" + action);
             const response = await responseRaw.json();
-            console.log(response)
             if (response.code === 200) {
                 loader.style.display = "none";
                 const doneregisterEndpoint = document.getElementById("doneendpoint");
