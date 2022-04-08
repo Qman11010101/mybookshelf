@@ -145,19 +145,15 @@ input[type=text] {
 
 /* ISBN入力画面(カメラ) */
 
-#photo-area {
-    border: 3px solid #ff0000;
-}
-
 #photo-area.viewport {
     width: 100%;
-    height: auto;
+    height: 300px;
 }
 
 #photo-area.viewport canvas,
 video {
     width: 100%;
-    height: auto;
+    height: 300px;
 }
 
 #photo-area.viewport canvas.drawingBuffer,
