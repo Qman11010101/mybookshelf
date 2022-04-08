@@ -147,11 +147,14 @@ input[type=text] {
 
 #photo-area.viewport {
     width: 100%;
+    height: 200px;
 }
 
 #photo-area.viewport canvas,
 video {
+    float:left;
     width: 100%;
+    height: 200px;
 }
 
 #photo-area.viewport canvas.drawingBuffer,
