@@ -123,7 +123,7 @@
             registered.scrollTop = registered.scrollHeight;
         }
 
-        // action: "move"もしくは"delete"
+        // action: "write"もしくは"delete"
         // URL自体は"search"も受け付けるがここではこの2つしか扱わない
         async function postBook(action) {
             uploadURL = localStorage.getItem("endpoint");
@@ -138,10 +138,11 @@
             const loader = document.getElementById("postloader");
             loader.style.display = "block";
             const responseRaw = await fetch(uploadURL + "?b=" + encodeURIComponent(dataStr) + "&action=" + action);
-            const response = responseRaw.json();
-            console.log(response.code)
+            const response = await responseRaw.json();
+            console.log(response)
             if (response.code === 200) {
                 loader.style.display = "none";
+                const doneregisterEndpoint = document.getElementById("doneendpoint");
                 doneregisterEndpoint.style.display = "block";
                 setTimeout(function () {
                     doneregisterEndpoint.style.display = "none";
@@ -172,10 +173,13 @@
                 <button class="remove">削除する</button>
             </div> -->
         </div>
+        
         <div id="postbooksection">
-            <button class="register" id="postbook" onclick="postBook()">送信する</button>
-            <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
+            <button class="register" id="postbook" onclick="postBook('write')">送信する</button>
             <div class="loader" id="postloader"></div>
+            <div id="buttonwrapper" class="inputblock">
+                <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
+            </div>
         </div>
     </div>
 </body>
