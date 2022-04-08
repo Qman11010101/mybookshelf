@@ -48,9 +48,9 @@ h3 {
     padding: calc(50px - 0.5em) 0;
     width: 100%;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 /* 登録ボタン */
@@ -80,9 +80,9 @@ h3 {
 
 label {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     cursor: default;
 }
 
@@ -141,4 +141,26 @@ input[type=text] {
 .remove:hover {
     background-color: #333;
     color: #fff;
+}
+
+/* ISBN入力画面(カメラ) */
+
+#photo-area {
+    border: 3px solid #ff0000;
+}
+
+#photo-area.viewport {
+    width: 100%;
+    height: auto;
+}
+
+#photo-area.viewport canvas,
+video {
+    width: 100%;
+    height: auto;
+}
+
+#photo-area.viewport canvas.drawingBuffer,
+video.drawingBuffer {
+    margin-left: -100%;
 }
