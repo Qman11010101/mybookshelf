@@ -147,17 +147,19 @@ input[type=text] {
 
 #photo-area.viewport {
     width: 100%;
-    height: 200px;
 }
 
 #photo-area.viewport canvas,
 video {
-    float:left;
     width: 100%;
-    height: 200px;
 }
 
 #photo-area.viewport canvas.drawingBuffer,
 video.drawingBuffer {
-    margin-left: -800px;
+    margin-left: -640px;
 }
+
+.drawingBuffer {
+    display: none;
+}
+
