@@ -55,7 +55,9 @@
                     remainder %= 10;
                     remainder = remainder === 0 ? 0 : 10 - remainder;
 
-                    alert(checkDigit === remainder)
+                    if (checkDigit === remainder) {
+                        registerISBNInside(isbn);
+                    }
                 }
             });
         });
@@ -68,6 +70,24 @@
         <h1>書籍登録ページ</h1>
         <div id="photo-area" class="viewport"></div>
     </div>
+    <h3>登録済み書籍</h3>
+        <div id="registeredbooks">
+            <!--placeholder-->
+            <!-- <div class="book">
+                <span class="bookkey">ISBN: </span><span class="isbnval">9764798160054</span><br>
+                <span class="bookkey">書名: </span><span class="titleval">図解まるわかり サーバーのしくみ</span><br>
+                <span class="bookkey">著者: </span><span class="authorval">西村泰洋</span><br>
+                <button class="remove">削除する</button>
+            </div> -->
+        </div>
+        
+        <div id="postbooksection">
+            <button class="register" id="postbook" onclick="postBook('write')">送信する</button>
+            <div class="loader" id="postloader"></div>
+            <div id="buttonwrapper" class="inputblock">
+                <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
+            </div>
+        </div>
 </body>
 
 </html>

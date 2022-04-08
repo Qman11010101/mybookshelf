@@ -36,16 +36,7 @@ function deleteRegisteredBook(isbn) {
     }
 }
 
-async function registerISBN() {
-    const isbn = document.getElementById("isbn").value;
-
-    if (isbn === "") {
-        alert("ISBNコードが入力されていません。");
-        return;
-    }
-
-    // TODO: ISBNコードのバリデーション(数字13桁)
-
+async function registerISBN(isbn) {
     const books = document.getElementById("registeredbooks").children;
 
     // 同一ISBNの本が登録済みでないか検索
@@ -154,4 +145,17 @@ async function postBook(action) {
         alert(`エラーが発生しました(Error ${response.code})`);
         loader.style.display = "none";
     }
+}
+
+async function registerISBNFromInput() {
+    const isbn = document.getElementById("isbn").value;
+
+    if (isbn === "") {
+        alert("ISBNコードが入力されていません。");
+        return;
+    }
+
+    // TODO: ISBNコードのバリデーション(数字13桁)
+
+    registerISBNInside(isbn);
 }
