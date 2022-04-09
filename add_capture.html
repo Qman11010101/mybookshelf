@@ -68,8 +68,10 @@
                         if (checkDigit === remainder) {
                             Quagga.stop();
                             const resp = registerISBN(code);
-                            if ("resp" === "Noexist") {
+                            if (resp === "Noexist") {
                                 alert("入力されたISBNの書籍はデータベース上に存在していないため、登録できません");
+                            } else if (resp === "Already registered") {
+                                alert("その書籍は既に登録されています")
                             }
                             overlay.style.display = "none";
                         }
