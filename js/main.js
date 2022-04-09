@@ -104,15 +104,6 @@ async function registerISBN(isbn) {
         deleteRegisteredBook(bookISBN);
     });
 
-    const booksAfter = document.getElementById("registeredbooks").children;
-
-    // 同一ISBNの本が登録済みでないか検索
-    for (let i = 0; i < booksAfter.length; i++) {
-        if (booksAfter[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
-            return "Already registered";
-        }
-    }
-
     // 本をリストに追加
     booksRegistered.push({
         isbn: bookISBN,
@@ -134,6 +125,7 @@ async function postBook(action) {
         return;
     }
 
+    console.log(booksRegistered)
     const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
     // 送信
@@ -143,6 +135,10 @@ async function postBook(action) {
     const response = await responseRaw.json();
     if (response.code === 200) {
         loader.style.display = "none";
+        let element = document.getElementById("registeredbooks");
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
         const doneregisterEndpoint = document.getElementById("doneendpoint");
         doneregisterEndpoint.style.display = "block";
         setTimeout(function () {
@@ -163,11 +159,26 @@ async function registerISBNFromInput() {
     }
 
     // TODO: ISBNコードのバリデーション(数字13桁)
+    let codeArray = isbn.split("").map(n => parseInt(n));
+    let remainder = 0;
+    const checkDigit = codeArray.pop();
 
-    const resp = registerISBN(isbn);
+    codeArray.forEach((num, index) => {
+        remainder += num * (index % 2 === 0 ? 1 : 3);
+    });
+    remainder %= 10;
+    remainder = remainder === 0 ? 0 : 10 - remainder;
+
+    if (checkDigit !== remainder) {
+        alert("チェックディジットの照合に失敗しました。入力にミスがないか、もう一度確かめてください");
+        return;
+    }
+
+    const resp = await registerISBN(isbn);
+    console.log(resp)
     if (resp === "Already registered") {
         alert("既に登録されています");
     } else if (resp === "Noexist") {
-        alert("入力されたISBNの書籍は存在していません");
+        alert("入力されたISBNの書籍はデータベース上に存在していないため、登録できません");
     }
 }

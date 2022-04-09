@@ -71,7 +71,10 @@
                         if (checkDigit === remainder) {
                             console.log(code)
                             Quagga.stop();
-                            registerISBN(code);
+                            const resp = registerISBN(code);
+                            if ("resp" === "Noexist") {
+                                alert("入力されたISBNの書籍はデータベース上に存在していないため、登録できません");
+                            }
                             overlay.style.display = "none";
                         }
                     }
