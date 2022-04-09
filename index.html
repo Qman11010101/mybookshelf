@@ -19,10 +19,10 @@
                 return;
             }
             localStorage.setItem("endpoint", endpointValue);
-            const doneregisterEndpoint = document.getElementById("doneendpoint");
-            doneregisterEndpoint.style.display = "block";
+            const doneregisterEndpoint = document.getElementById("registerendpoint");
+            doneregisterEndpoint.innerText = "✓ 登録しました";
             setTimeout(function () {
-                doneregisterEndpoint.style.display = "none";
+                doneregisterEndpoint.innerText = "URLを登録する";
             }, 3000);
         }
     </script>
@@ -49,7 +49,6 @@
             <label for="endpoint">アップロードURL</label>
             <input type="text" id="endpoint">
             <button class="register" id="registerendpoint" onclick="registerEndpoint()">URLを登録する</button>
-            <div class="doneregister" id="doneendpoint">✓ 登録しました</div>
         </div>
     </div>
 

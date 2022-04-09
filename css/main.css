@@ -69,13 +69,6 @@ h3 {
     color: #fff;
 }
 
-/* エンドポイント入力 */
-
-.doneregister {
-    color: #006600;
-    display: none;
-}
-
 /* 汎用入力画面 */
 
 label {
@@ -172,8 +165,3 @@ video {
     width: min(100%, 500px);
     margin: 0 auto;
 }
-
-/* #photo-area.viewport canvas.drawingBuffer,
-video.drawingBuffer {
-    margin-left: -640px;
-} */

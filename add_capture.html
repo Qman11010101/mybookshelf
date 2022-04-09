@@ -69,7 +69,6 @@
                         remainder = remainder === 0 ? 0 : 10 - remainder;
 
                         if (checkDigit === remainder) {
-                            console.log(code)
                             Quagga.stop();
                             const resp = registerISBN(code);
                             if ("resp" === "Noexist") {
@@ -108,11 +107,8 @@
         </div>
 
         <div id="postbooksection">
-            <button class="register" id="postbook" onclick="postBook('write')">送信する</button>
             <div class="loader" id="postloader"></div>
-            <div id="buttonwrapper" class="inputblock">
-                <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
-            </div>
+            <button class="register" id="postbook" onclick="postBook('write')">送信する</button>
         </div>
     </div>
 </body>

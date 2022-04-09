@@ -130,7 +130,6 @@ async function postBook(action) {
         return;
     }
 
-    console.log(booksRegistered)
     const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
     // 送信
@@ -145,10 +144,10 @@ async function postBook(action) {
             element.removeChild(element.firstChild);
         }
         booksRegistered = [];
-        const doneregisterEndpoint = document.getElementById("doneendpoint");
-        doneregisterEndpoint.style.display = "block";
+        const donepostbook = document.getElementById("postbook");
+        donepostbook.innerText = "✓ 送信しました";
         setTimeout(function () {
-            doneregisterEndpoint.style.display = "none";
+            donepostbook.innerText = "送信する";
         }, 3000);
     } else {
         alert(`エラーが発生しました(Error ${response.code})`);
