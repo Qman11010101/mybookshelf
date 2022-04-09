@@ -159,7 +159,6 @@ async function registerISBNFromInput() {
         return;
     }
 
-    // TODO: ISBNコードのバリデーション(数字13桁)
     let codeArray = isbn.split("").map(n => parseInt(n));
     let remainder = 0;
     const checkDigit = codeArray.pop();
