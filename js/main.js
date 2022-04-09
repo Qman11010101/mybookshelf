@@ -139,6 +139,7 @@ async function postBook(action) {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
+        booksRegistered = [];
         const doneregisterEndpoint = document.getElementById("doneendpoint");
         doneregisterEndpoint.style.display = "block";
         setTimeout(function () {
