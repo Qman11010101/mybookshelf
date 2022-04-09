@@ -112,9 +112,9 @@ input[type=text] {
     width: 100%;
     text-align: left;
     padding: 15px;
-    white-space: nowrap;
+    /* white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
     margin-bottom: 20px;
 }
 
