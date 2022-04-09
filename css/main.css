@@ -145,21 +145,35 @@ input[type=text] {
 
 /* ISBN入力画面(カメラ) */
 
-#photo-area.viewport {
+#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(100, 100, 100, .8);
+    z-index: 2147483647;
+    display: none;
+}
+
+#overlaywrapper {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#photo-area.viewport {
+    width: min(100%, 500px);
+    margin: 0 auto;
 }
 
 #photo-area.viewport canvas,
 video {
-    width: 100%;
+    width: min(100%, 500px);
+    margin: 0 auto;
 }
 
-#photo-area.viewport canvas.drawingBuffer,
+/* #photo-area.viewport canvas.drawingBuffer,
 video.drawingBuffer {
     margin-left: -640px;
-}
-
-.drawingBuffer {
-    display: none;
-}
-
+} */

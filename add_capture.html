@@ -11,8 +11,13 @@
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
     <script>
+        // window.addEventListener("DOMContentLoaded", function () {
+
+        // });
         // 実装後camera.jsかなにかに隔離
-        window.addEventListener("DOMContentLoaded", function () {
+        function registerBooksFromCamera() {
+            const overlay = document.getElementById("overlay");
+            overlay.style.display = "block";
             Quagga.init({
                 inputStream: {
                     name: "Live",
@@ -56,11 +61,14 @@
                     remainder = remainder === 0 ? 0 : 10 - remainder;
 
                     if (checkDigit === remainder) {
+                        console.log(code)
+                        Quagga.stop();
                         registerISBN(code);
+                        overlay.style.display = "none";
                     }
                 }
             });
-        });
+        }
 
     </script>
 </head>
@@ -68,9 +76,15 @@
 <body>
     <div id="bodyblock">
         <h1>書籍登録ページ</h1>
-        <div id="photo-area" class="viewport"></div>
-    </div>
-    <h3>登録済み書籍</h3>
+        <button class="register" id="registerbook" onclick="registerBooksFromCamera()">書籍を登録する</button>
+        <div id="overlay">
+            <div id="overlaywrapper">
+                <h3 style="color: white;">カメラにISBNバーコードを写してください</h3>
+                <div id="photo-area" class="viewport"></div>
+            </div>
+        </div>
+
+        <h3>登録済み書籍</h3>
         <div id="registeredbooks">
             <!--placeholder-->
             <!-- <div class="book">
@@ -80,7 +94,7 @@
                 <button class="remove">削除する</button>
             </div> -->
         </div>
-        
+
         <div id="postbooksection">
             <button class="register" id="postbook" onclick="postBook('write')">送信する</button>
             <div class="loader" id="postloader"></div>
@@ -88,6 +102,7 @@
                 <div class="doneregister" id="doneendpoint">✓ 送信しました</div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

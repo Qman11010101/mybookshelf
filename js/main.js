@@ -51,8 +51,7 @@ async function registerISBN(isbn) {
     const bookData = JSON.parse(bookDataRaw)[0];
 
     if (bookData === null) {
-        alert("入力されたISBNコードの本は存在しないか、データベースに登録されていません。");
-        return;
+        return "Noexist";
     }
 
     // 要素追加
@@ -105,6 +104,15 @@ async function registerISBN(isbn) {
         deleteRegisteredBook(bookISBN);
     });
 
+    const booksAfter = document.getElementById("registeredbooks").children;
+
+    // 同一ISBNの本が登録済みでないか検索
+    for (let i = 0; i < booksAfter.length; i++) {
+        if (booksAfter[i].getElementsByClassName("isbnval")[0].innerText === isbn) {
+            return "Already registered";
+        }
+    }
+
     // 本をリストに追加
     booksRegistered.push({
         isbn: bookISBN,
@@ -156,8 +164,10 @@ async function registerISBNFromInput() {
 
     // TODO: ISBNコードのバリデーション(数字13桁)
 
-    const resp = registerISBNInside(isbn);
+    const resp = registerISBN(isbn);
     if (resp === "Already registered") {
-        alert("既に登録されています")
+        alert("既に登録されています");
+    } else if (resp === "Noexist") {
+        alert("入力されたISBNの書籍は存在していません");
     }
 }
