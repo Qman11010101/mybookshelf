@@ -13,11 +13,10 @@
         var books = [];
 
         async function deleteFromDatabase(isbn) {
-            console.log(books)
             const flag = confirm("本当に削除しますか？");
             if (flag) {
                 const uploadURL = localStorage.getItem("endpoint");
-                const upDataRaw = JSON.stringify([{isbn: String(isbn)}]);
+                const upDataRaw = JSON.stringify([{ isbn: String(isbn) }]);
                 const upData = await base64Encode(upDataRaw);
                 const rawData = await fetch(uploadURL + "?action=delete&b=" + encodeURIComponent(upData));
                 const data = await rawData.json();
@@ -32,7 +31,6 @@
                 for (let i = 0; i < books.length; i++) {
                     if (books[i].isbn === isbn) {
                         books.splice(i, 1);
-                        console.log(books)
                         break;
                     }
                 }
@@ -51,49 +49,49 @@
 
             for (let i = 0; i < data.length; i++) {
                 // 要素追加
-                const searched = document.getElementById("searched");
+                let searched = document.getElementById("searched");
 
-                const bookdiv = searched.appendChild(document.createElement("div"));
+                let bookdiv = searched.appendChild(document.createElement("div"));
                 bookdiv.className = "book";
 
-                const bookISBN = data[i].isbn;
-                const bookTitle = data[i].title;
+                let bookISBN = data[i].isbn;
+                let bookTitle = data[i].title;
 
                 let bookAuthors = data[i].author;
 
-                const bookPublisher = data[i].publisher;
+                let bookPublisher = data[i].publisher;
 
-                const isbnkey = bookdiv.appendChild(document.createElement("span"));
+                let isbnkey = bookdiv.appendChild(document.createElement("span"));
                 isbnkey.innerText = "ISBN: ";
                 isbnkey.className = "bookkey";
 
-                const isbnval = bookdiv.appendChild(document.createElement("span"));
+                let isbnval = bookdiv.appendChild(document.createElement("span"));
                 isbnval.innerText = bookISBN;
                 isbnval.className = "isbnval";
 
                 bookdiv.appendChild(document.createElement("br"));
 
-                const titlekey = bookdiv.appendChild(document.createElement("span"));
+                let titlekey = bookdiv.appendChild(document.createElement("span"));
                 titlekey.innerText = "書名: ";
                 titlekey.className = "bookkey";
 
-                const titleval = bookdiv.appendChild(document.createElement("span"));
+                let titleval = bookdiv.appendChild(document.createElement("span"));
                 titleval.innerText = bookTitle;
                 titleval.className = "titleval";
 
                 bookdiv.appendChild(document.createElement("br"));
 
-                const authorkey = bookdiv.appendChild(document.createElement("span"));
+                let authorkey = bookdiv.appendChild(document.createElement("span"));
                 authorkey.innerText = "著者: ";
                 authorkey.className = "bookkey";
 
-                const authorval = bookdiv.appendChild(document.createElement("span"));
+                let authorval = bookdiv.appendChild(document.createElement("span"));
                 authorval.innerText = bookAuthors;
                 authorval.className = "authorval";
 
                 bookdiv.appendChild(document.createElement("br"));
 
-                const deleteButton = bookdiv.appendChild(document.createElement("button"));
+                let deleteButton = bookdiv.appendChild(document.createElement("button"));
                 deleteButton.className = "remove";
                 deleteButton.innerText = "削除する";
                 deleteButton.addEventListener("click", function () {
@@ -105,8 +103,74 @@
         });
 
         function search() {
-            const registeredBooksArray = document.getElementById("searched").children;
+            const tempBooks = books;
+            let res = [];
+            const query = document.getElementById("query").value;
+            for (let i = 0; i < tempBooks.length; i++) {
+                let tb = tempBooks[i];
+                let searchstr = tb.isbn + tb.title + tb.author + tb.publisher;
+                console.log(query.normalize("NFKC").toLowerCase(), searchstr.normalize("NFKC").toLowerCase())
+                if (searchstr.normalize("NFKC").toLowerCase().indexOf(query.normalize("NFKC").toLowerCase()) !== -1) {
+                    res.push(tb);
+                }
+            }
 
+            let element = document.getElementById("searched");
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+
+            for (let i = 0; i < res.length; i++) {
+                // 要素追加
+                let searched = document.getElementById("searched");
+
+                let bookdiv = searched.appendChild(document.createElement("div"));
+                bookdiv.className = "book";
+
+                let bookISBN = res[i].isbn;
+                let bookTitle = res[i].title;
+
+                let bookAuthors = res[i].author;
+
+                let bookPublisher = res[i].publisher;
+
+                let isbnkey = bookdiv.appendChild(document.createElement("span"));
+                isbnkey.innerText = "ISBN: ";
+                isbnkey.className = "bookkey";
+
+                let isbnval = bookdiv.appendChild(document.createElement("span"));
+                isbnval.innerText = bookISBN;
+                isbnval.className = "isbnval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                let titlekey = bookdiv.appendChild(document.createElement("span"));
+                titlekey.innerText = "書名: ";
+                titlekey.className = "bookkey";
+
+                let titleval = bookdiv.appendChild(document.createElement("span"));
+                titleval.innerText = bookTitle;
+                titleval.className = "titleval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                let authorkey = bookdiv.appendChild(document.createElement("span"));
+                authorkey.innerText = "著者: ";
+                authorkey.className = "bookkey";
+
+                let authorval = bookdiv.appendChild(document.createElement("span"));
+                authorval.innerText = bookAuthors;
+                authorval.className = "authorval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                let deleteButton = bookdiv.appendChild(document.createElement("button"));
+                deleteButton.className = "remove";
+                deleteButton.innerText = "削除する";
+                deleteButton.addEventListener("click", function () {
+                    deleteFromDatabase(bookISBN);
+                });
+            }
         }
 
 
