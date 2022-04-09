@@ -7,16 +7,98 @@
     <title>我が家の本棚</title>
     <link rel="stylesheet" href="css/destyle.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <script src="js/util.js"></script>
     <script>
-        window.addEventListener("DOMContentLoaded", function () {
+        async function deleteFromDatabase(isbn) {
+            const flag = confirm("本当に削除しますか？");
+            if (flag) {
+                const uploadURL = localStorage.getItem("endpoint");
+                const upDataRaw = JSON.stringify([{isbn: String(isbn)}]);
+                console.log(upDataRaw)
+                const upData = await base64Encode(upDataRaw);
+                const rawData = await fetch(uploadURL + "?action=delete&b=" + encodeURIComponent(upData));
+                const data = await rawData.json();
+                console.log(data)
+                const registeredBooksArray = document.getElementById("searched").children;
+                for (let i = 0; i < registeredBooksArray.length; i++) {
+                    let bookdiv = registeredBooksArray[i];
+                    if (bookdiv.getElementsByClassName("isbnval")[0].innerText == isbn) {
+                        bookdiv.remove();
+                        break;
+                    }
+                }
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", async function () {
+            const loader = document.getElementById("searchloader");
+            loader.style.display = "block";
+
             const uploadURL = localStorage.getItem("endpoint");
-            
+            const searchResElm = document.getElementById("searched");
+            const rawData = await fetch(uploadURL + "?action=search");
+            const data = await rawData.json();
+
+            for (let i = 0; i < data.length; i++) {
+                // 要素追加
+                const searched = document.getElementById("searched");
+
+                const bookdiv = searched.appendChild(document.createElement("div"));
+                bookdiv.className = "book";
+
+                const bookISBN = data[i].isbn;
+                const bookTitle = data[i].title;
+
+                let bookAuthors = data[i].author;
+
+                const bookPublisher = data[i].publisher;
+
+                const isbnkey = bookdiv.appendChild(document.createElement("span"));
+                isbnkey.innerText = "ISBN: ";
+                isbnkey.className = "bookkey";
+
+                const isbnval = bookdiv.appendChild(document.createElement("span"));
+                isbnval.innerText = bookISBN;
+                isbnval.className = "isbnval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                const titlekey = bookdiv.appendChild(document.createElement("span"));
+                titlekey.innerText = "書名: ";
+                titlekey.className = "bookkey";
+
+                const titleval = bookdiv.appendChild(document.createElement("span"));
+                titleval.innerText = bookTitle;
+                titleval.className = "titleval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                const authorkey = bookdiv.appendChild(document.createElement("span"));
+                authorkey.innerText = "著者: ";
+                authorkey.className = "bookkey";
+
+                const authorval = bookdiv.appendChild(document.createElement("span"));
+                authorval.innerText = bookAuthors;
+                authorval.className = "authorval";
+
+                bookdiv.appendChild(document.createElement("br"));
+
+                const deleteButton = bookdiv.appendChild(document.createElement("button"));
+                deleteButton.className = "remove";
+                deleteButton.innerText = "削除する";
+                deleteButton.addEventListener("click", function () {
+                    deleteFromDatabase(bookISBN);
+                });
+            }
+
+            loader.style.display = "none";
         });
-        
+
         function search() {
 
         }
-        
+
 
     </script>
 </head>
@@ -27,14 +109,15 @@
         <div class="inputblock">
             <label for="query">検索キーワードを入力</label><br>
             <input type="text" id="query">
-            <button class="register" id="search" onclick="search()">検索する</button>
+            <button class="generalButton" id="search" onclick="search()">検索する</button>
         </div>
         <h3>検索結果</h3>
+        <div class="loader" id="searchloader"></div>
         <div id="searched">
-        
+
         </div>
     </div>
-    
+
 </body>
 
 </html>

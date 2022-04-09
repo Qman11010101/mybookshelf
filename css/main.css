@@ -165,3 +165,13 @@ video {
     width: min(100%, 500px);
     margin: 0 auto;
 }
+
+/* 検索・削除ページ */
+
+#searched {
+    height: 60vh;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    margin-bottom: 20px;
+}
