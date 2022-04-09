@@ -18,6 +18,12 @@ function deleteRegisteredBook(isbn) {
             break;
         }
     }
+    for (let i = 0; i < booksRegistered.length; i++) {
+        if (booksRegistered[i].isbn === isbn) {
+            booksRegistered.splice(i, 1);
+            break;
+        }
+    }
 }
 
 async function registerISBN(isbn) {
