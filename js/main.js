@@ -125,6 +125,11 @@ async function postBook(action) {
         return;
     }
 
+    if (booksRegistered === []) {
+        alert("本が登録されていません");
+        return;
+    }
+
     console.log(booksRegistered)
     const dataStr = await base64Encode(JSON.stringify(booksRegistered));
 
