@@ -7,12 +7,34 @@
     <title>我が家の本棚</title>
     <link rel="stylesheet" href="css/destyle.css">
     <link rel="stylesheet" href="css/main.css">
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            const uploadURL = localStorage.getItem("endpoint");
+            
+        });
+        
+        function search() {
+
+        }
+        
+
+    </script>
 </head>
 
 <body>
     <div id="bodyblock">
-        <h1>我が家の本棚</h1>
+        <h1>書籍登録・検索ページ</h1>
+        <div class="inputblock">
+            <label for="query">検索キーワードを入力</label><br>
+            <input type="text" id="query">
+            <button class="register" id="search" onclick="search()">検索する</button>
+        </div>
+        <h3>検索結果</h3>
+        <div id="searched">
+        
+        </div>
     </div>
+    
 </body>
 
 </html>
